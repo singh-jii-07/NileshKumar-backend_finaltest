@@ -47,7 +47,7 @@ const logingUser=async(req,res)=>{
                     message: "All fields are required"
                 })
         }
-     const user = await User.findOne({email});
+     const user = await User.findOne({name});
             if(!user){
                 return res.status(400).json({
                     message: "User not found"
@@ -61,7 +61,7 @@ const logingUser=async(req,res)=>{
             }
      return res.status(200).json({
                 message: "Login successful",
-                token
+                user
             });
     }
      catch(err){
