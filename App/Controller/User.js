@@ -9,6 +9,7 @@ if(!name || !email|| !password){
      return res.status(400).json({
                 message: "All fields are required"
             })
+            
 }
 
   const oldUser = await User.findOne({email});
@@ -24,15 +25,16 @@ const user= new User({
     email,
     password: hashedPaswd
 })
+console.log(name)
 await user.save()
  return res.status(201).json({
             message: "User registered successfully",
-            success: true
+           user
         })
 }
   catch(err){
         console.error("Error in registerUser:", err);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Internal server error",err });
     }
 }
 export {registerUser}
