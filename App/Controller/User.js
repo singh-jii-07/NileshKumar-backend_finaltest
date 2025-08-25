@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from '../Module/User.js'
+import { sendStudentMail } from './NodeMailer.js'
 const registerUser=async(req,res)=>{
     try{
 
@@ -26,6 +27,7 @@ const user= new User({
     password: hashedPaswd
 })
 console.log(name)
+await sendStudentMail(user);
 await user.save()
  return res.status(201).json({
             message: "User registered successfully",
